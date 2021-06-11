@@ -24,3 +24,4 @@ git push origin %branchname% --force
 git cehckout master
 git merge %branchname%
 git push origin master
+PAUSE
