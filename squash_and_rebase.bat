@@ -4,10 +4,10 @@ ECHO This will Squash your work into one commit in the git
 ::ECHO ONLY PROCEED IF YOU HAVE TESTED ::
 PAUSE
 ECHO ENTER THE BRANCH NAME YOU ARE WORKING ON EXACTLY
-SET branchname="ENTER BRANCH NAME: "
+SET /P branchname="ENTER BRANCH NAME: "
 PAUSE
 ::get last commit SHA::
-last_commit_SHA=$(git rev-parse HEAD)
+SET last_commit_SHA=$(git rev-parse HEAD)
 ::squash into 1 commit::
 git rebase -i %last_commit_SHA%
 ::push to remote::
@@ -24,3 +24,4 @@ git push origin %branchname% --force
 git cehckout master
 git merge %branchname%
 git push origin master
+PAUSE
