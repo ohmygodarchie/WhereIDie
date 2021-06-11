@@ -21,7 +21,7 @@ git pull origin master
 git checkout %branchname%
 git rebase master
 git push origin %branchname% --force
-git cehckout master
+git checkout master
 git merge %branchname%
 git push origin master
 PAUSE
