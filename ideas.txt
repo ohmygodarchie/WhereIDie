@@ -1,0 +1,75 @@
+1. authenticate user as per riot mandate
+    use account-v1 api returns puuid 
+2. get user matches using /val/match/v1/matchlists/by-puuid/{puuid}
+    filter at this stage by acts if needed
+3. select match and get info using /val/match/v1/matches/{matchId}
+4. using match stats do following
+    1. MatchinfoDTO
+        just info abt match (is it ranked etc)
+    2. MatchDto
+        gets players list[Playerdto], teams: string(red,blue), and round results
+    3. player stats (not really that important bc we are tracking deaths)
+    4. RoundResult
+        need:
+            roundnum
+            round result
+            roundceremony(unsure what this is)
+            winning teams
+            bomb planter
+            defuser
+            round time
+            plantPlayerLocations	List[PlayerLocationsDto]
+            plantLocation	LocationDto
+            plantSite (nice to have)
+            defuse round time
+            defuseRoundTime	int	
+            defusePlayerLocations	List[PlayerLocationsDto]	
+            defuseLocation	LocationDto	
+            playerStats	List[PlayerRoundStatsDto]	
+            roundResultCode	string
+        use round num,result,winning team,time for basic round info
+        plant player locations essential for plant analysis
+        defuse locations also needed
+    4. PlayerLocationsDto
+        this has direction where ur looking in radians (needed for death analysis)
+        LocationDto
+    5. LocationDto
+        Crucial to get this working.
+        need to map the x,y coordinates to the image of the map
+            must support scaling
+
+    6. player round stats arent that big of a deal, nice to have
+    7. KillDto
+        pretty much entire idea relies on this
+            provides all kill information including victim and attacker
+            provides location of victim[locationDTO with puuid] and remaining players (PlayerLocationsDto)
+    8. finishing damage
+        tells type of damage u died to, if died to line ups useful bc u can know to clear that area on retake or something
+    9. economy
+        useful for differenciating hero buy strats, eco strats, full buy etc
+
+Other things:
+    will be a windows program maybe??? ios app??? depends on what is easier or interersting
+    must get riot permission for this api: develop pitch
+    we can 3D render the map to get an even better idea of where person died
+        need 3d models of map
+        need to tie the 2d death x,y coordinates to xyz. map details can help with this (boxes are highlighted so we can place player model on top of it)
+            maps like fracture are weird. map has layers that make putting player on the map difficult
+        player facing the right way is easy bc map direction and the viewRadians are statically linked (rads 0 = north)
+            going to require testing to figure out proper orientation
+    
+Key usage:
+    - post plant setups, player positioning is vital
+    - trade analysis 
+    - lineup counter bc u can see where line up is
+    - Implement heat maps per rank to see how diff elos play the game after plant with each composition:
+        this would be the key selling point of program
+        requires saving data in a way where agents player locations are saved, econ (if save,halfbuy,full)
+    - mask off an train an AI model to analyze Economy and correlate to strats idfk
+    - determine player tendencies and suggest improvements
+        this could be wild 
+    
+
+takeaway:
+    massive potential lowkey for pro play analysis and team strats
+
