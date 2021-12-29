@@ -77,8 +77,10 @@ class Team:
         self.teamid = teamdto['teamId']
         self.teamname = teamdto['teamName']
         self.teamtag = teamdto['teamTag']
+
     def setTeamPlayer(self,Player):
         self.teamplayers.append(Player)
+
     def setTeamCoach(self,Coach):
         self.teamcoach = Coach
 

@@ -12,13 +12,13 @@ class Account:
     listofmatches = []
     api=None
     def __init__(self,accountDto,api_obj):
-        self.__setpuuid(accountDto["puuid"])
+        self.puuid = accountDto["puuid"]
         self.gamename = accountDto["gameName"]
         self.tagline = accountDto["tagLine"]
         self.api = api_obj
-        matchlistrepsonse = self.api.getmatchlist(self.puuid)
-        self.matchlist = MatchList(matchlistrepsonse)
-        self.__populate_listofmatches()
+        #matchlistrepsonse = self.api.getmatchlist(self.puuid)
+        #self.matchlist = MatchList(matchlistrepsonse)
+        #self.__populate_listofmatches()
     def __populate_listofmatches(self):
         #populates actual Match objects for account
         for match in self.matchlist.matchlistentries:
