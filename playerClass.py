@@ -5,8 +5,8 @@ class Player:
     gamename=""
     tagline=""
     puuid=""
-    partyid=None
-    stats = []#stats class
+    partyid=""
+    stats =None #stats class
     rank = 0
     
     #can add player card and title can implement later
@@ -70,14 +70,17 @@ class Team:
     teamname=""
     teamtag=""
     teamplayers=[]
-    matchId=-1
+    matchId=""
+    teamcoach = None
 
     def __init__(self,teamdto):
         self.teamid = teamdto['teamId']
         self.teamname = teamdto['teamName']
         self.teamtag = teamdto['teamTag']
-    def __setTeamPlayer(self,Player):
+    def setTeamPlayer(self,Player):
         self.teamplayers.append(Player)
+    def setTeamCoach(self,Coach):
+        self.teamcoach = Coach
 
 
 

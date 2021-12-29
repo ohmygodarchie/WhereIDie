@@ -78,6 +78,14 @@ class Match:
             for y in self.players:
                 if x.teamId == y.teamId:
                     x.setTeamPlayer(y)
+    def assignCoachesToTeams(self):
+        #assumes teams and coaches are populated
+        #assigns coaches to teams
+        #pretty inefficient could be improved in later versions
+        for x in self.teams:
+            for y in self.coaches:
+                if x.teamId == y.teamId:
+                    x.setTeamCoach(y)
 
 class MatchInfo:
     matchId = ""
