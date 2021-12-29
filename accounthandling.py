@@ -1,7 +1,7 @@
 import json
 import sys
 import getinfo
-class account:
+class aAcount:
     puuid="" 
     matchlist=[]
     gamename=""
@@ -27,5 +27,5 @@ class account:
 #testing just getting puuid
 #matchlist cant be populated due to api key restrictions
 apiobj = getinfo.apihandler('RGAPI-dc863e8b-237b-4a8e-b8a3-525bfc57fd1d')
-accountobj = account(apiobj,"ohmygodarchie","001")
+accountobj = aAcount(apiobj,"ohmygodarchie","002")
 print(accountobj.puuid)

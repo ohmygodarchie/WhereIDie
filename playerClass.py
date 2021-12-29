@@ -17,11 +17,11 @@ class Player:
         self.tagline = playerdto['tagLine']
         self.puuid = playerdto['puuid']
         self.partyid = playerdto['partyId']
-        self.stats = stats(playerdto['stats'])
+        self.stats = Stats(playerdto['stats'])
         self.rank = playerdto['rank']
 
     
-class stats:
+class Stats:
     score =0
     roundsPlayed=0
     kills=0
@@ -38,7 +38,7 @@ class stats:
         self.deaths = statsdto['deaths']
         self.assists = statsdto['assists']
         self.playtime = statsdto['playtime']
-        self.abilitycasts = statsdto['abilityCasts']
+        self.abilitycasts = AbilityCasts(statsdto['abilityCasts'])
         self.__setkda()
         self.__setkd()
     
@@ -48,7 +48,7 @@ class stats:
     def __setkd(self):
         self.kd = self.kills/self.deaths
 
-class ability:
+class AbilityCasts:
     grenadecasts=0
     ability1 = 0
     ability2 = 0
@@ -59,7 +59,7 @@ class ability:
         self.ability2 = abilitydto['ability2']
         self.ults = abilitydto['ultimateCasts']
      
-class coach:
+class Coach:
     puuid=0
     gamename=""
     tagline=""
@@ -69,3 +69,21 @@ class coach:
         self.gamename = self.api.getvalname_tag(self.puuid)["gameName"]
         self.tagline = self.api.getvalname_tag(self.puuid)["tagLine"]
     
+class Team:
+    teamid=0
+    teamname=""
+    teamtag=""
+    teamplayers=[]
+    matchId=-1
+
+    def __init__(self,teamdto,matchId):
+        self.teamid = teamdto['teamId']
+        self.teamname = teamdto['teamName']
+        self.teamtag = teamdto['teamTag']
+        self.matchId = matchId
+    def __setTeamPlayer(self,Player):
+        self.teamplayers.append(Player)
+
+
+
+
