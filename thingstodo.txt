@@ -1,0 +1,2 @@
+might need to add an api call to get map stuff
+check out https://dash.valorant-api.com/endpoints/maps
