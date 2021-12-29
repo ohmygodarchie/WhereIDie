@@ -1,5 +1,5 @@
 import playerClass
-import LocationHandler
+import LocationClasses
 import KillClass
 class Round:
     roundnum=-1
@@ -36,7 +36,7 @@ class Round:
         #if not, will need to be changed
         for x in playerlocations:
 
-            self.plantPlayerLocations.append(LocationHandler.PlayerLocations(playerlocations[x]))
+            self.plantPlayerLocations.append(LocationClasses.PlayerLocations(playerlocations[x]))
 
 class Match:
     matchinfo = None 

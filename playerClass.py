@@ -61,26 +61,21 @@ class AbilityCasts:
      
 class Coach:
     puuid=0
-    gamename=""
-    tagline=""
-    api=None
-    def __init__(self,puuid):
-        self.puuid = puuid
-        self.gamename = self.api.getvalname_tag(self.puuid)["gameName"]
-        self.tagline = self.api.getvalname_tag(self.puuid)["tagLine"]
+    teamId = ""
+    def __init__(self,coachdto) -> None:
+        self.puuid = coachdto['puuid']
+        self.teamId = coachdto['teamId']
     
 class Team:
-    teamid=0
     teamname=""
     teamtag=""
     teamplayers=[]
     matchId=-1
 
-    def __init__(self,teamdto,matchId):
+    def __init__(self,teamdto):
         self.teamid = teamdto['teamId']
         self.teamname = teamdto['teamName']
         self.teamtag = teamdto['teamTag']
-        self.matchId = matchId
     def __setTeamPlayer(self,Player):
         self.teamplayers.append(Player)
 
