@@ -20,12 +20,12 @@ class account:
     def getpuuid(self):
         return self.puuid
     def __set_user_matchlist(self):
-        self.matchlist = self.api.getmatchlist(self.puuid)
+        self.matchlist = self.api.getmatchlist(self.puuid) #this will need json parsing cant test so rip
     def get_user_matchlist(self):
         return self.matchlist
 
 #testing just getting puuid
 #matchlist cant be populated due to api key restrictions
-apiobj = getinfo.apihandler('RGAPI-530908f5-16fa-4d62-a692-e13c8df520a8')
+apiobj = getinfo.apihandler('RGAPI-dc863e8b-237b-4a8e-b8a3-525bfc57fd1d')
 accountobj = account(apiobj,"ohmygodarchie","001")
 print(accountobj.puuid)

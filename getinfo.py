@@ -22,6 +22,9 @@ class apihandler:
         url = self.urlset('/riot/account/v1/accounts/by-riot-id/'+gamename+'/'+tagline)
         return self.response(url)
 
+    def getvalname_tag(self,puuid):
+        url = self.urlset('/riot/account/v1/accounts/by-puuid/'+str(puuid))
+        return self.response(url)
 
     def getmatchlist(self,puuid):
         url = self.urlset('/val/match/v1/matchlists/by-puuid/'+str(puuid))
