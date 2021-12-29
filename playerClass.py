@@ -1,0 +1,4 @@
+class Player:
+    team =""
+    agent=""
+    
