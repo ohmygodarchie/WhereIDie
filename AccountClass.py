@@ -1,33 +1,45 @@
 import json
 import sys
 import getinfo
+import MatchClasses
 
-##make matchlist entry object etc
+
 class Account:
     puuid="" 
-    matchlist=[]
     gamename=""
     tagline=""
+    matchlist = None
+    listofmatches = []
     api=None
-    def __init__(self,apihandler_obj,gamename,tagline):
-        self.api = apihandler_obj
-        self.gamename = gamename
-        self.tagline = tagline
-        puuidresponse = self.api.getvalpuuid(self.gamename,self.tagline)
-        self.__setpuuid(puuidresponse['puuid'])
-        ##blow requires higher auth api key
-        #self.api.__set_user_matchlist()
-    def __setpuuid(self,puuid):
-        self.puuid = puuid
-    def getpuuid(self):
-        return self.puuid
-    def __set_user_matchlist(self):
-        self.matchlist = self.api.getmatchlist(self.puuid) #this will need json parsing cant test so rip
-    def get_user_matchlist(self):
-        return self.matchlist
+    def __init__(self,accountDto,api_obj):
+        self.__setpuuid(accountDto["puuid"])
+        self.gamename = accountDto["gameName"]
+        self.tagline = accountDto["tagLine"]
+        self.api = api_obj
+        matchlistrepsonse = self.api.getmatchlist(self.puuid)
+        self.matchlist = MatchList(matchlistrepsonse)
+        self.__populate_listofmatches()
+    def __populate_listofmatches(self):
+        #populates actual Match objects for account
+        for match in self.matchlist.matchlistentries:
+            matchresponse = self.api.getvalmatch(match.matchid)
+            self.listofmatches.append(MatchClasses.Match(matchresponse))
+class MatchList:
+    puuid = ""
+    matchlistentries = []
+    def __init__(self,matchlistdto) -> None:
+        self.puuid = matchlistdto['puuid']
+        self.__setmatchlist(matchlistdto['history'])
+    def __setmatchlist(self,matchlistdto):
+        #populates matchlist entry objects to list
+        for matchlistentry in matchlistdto:
+            self.matchlistentries.append(MatchListEntry(matchlistentry))
 
-#testing just getting puuid
-#matchlist cant be populated due to api key restrictions
-apiobj = getinfo.apihandler('RGAPI-dc863e8b-237b-4a8e-b8a3-525bfc57fd1d')
-accountobj = Account(apiobj,"ohmygodarchie","002")
-print(accountobj.puuid)
+class MatchListEntry:
+    matchId=""
+    gameStartTimeMillis =-1
+    teamId = ""
+    def __init__(self,matchlistentrydto) -> None:
+        self.matchId = matchlistentrydto['matchId']
+        self.gameStartTimeMillis = matchlistentrydto['gameStartTimeMillis']
+        self.teamId = matchlistentrydto['teamId']
