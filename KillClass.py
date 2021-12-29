@@ -1,4 +1,4 @@
-import LocationHandler
+import LocationClasses
 import OtherClasses
 
 class PlayerRoundStats:
@@ -42,7 +42,7 @@ class Kill:
     def __init__(self,killDto):
         self.killer = killDto['killer']
         self.victim = killDto['victim']
-        self.victimLocation = LocationHandler.Locations(killDto['victimLocation']['x'],killDto['victimLocation']['y'])
+        self.victimLocation = LocationClasses.Locations(killDto['victimLocation']['x'],killDto['victimLocation']['y'])
         self.__setassistants(killDto['assistants'])
         self.__setplayerLocations(killDto['playerLocations'])
         self.finishingdamage = FinishingDamage(killDto['finishingdamage'])
@@ -52,7 +52,7 @@ class Kill:
             self.assistants.append(assistants[x])
     def __setplayerLocations(self,playerLocations):
         for x in playerLocations:
-            self.playerLocations.append(LocationHandler.PlayerLocations(playerLocations[x]))
+            self.playerLocations.append(LocationClasses.PlayerLocations(playerLocations[x]))
 
 class FinishingDamage:
     damageType = ""
