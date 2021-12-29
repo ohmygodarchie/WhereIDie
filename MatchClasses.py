@@ -12,6 +12,8 @@ class Round:
     plantPlayerLocations = [] 
     playerRoundStats = [] #playerRoundStats in KillClass.py
     roundResultCode =""
+    defusePlayerLocations = []
+    defuseLocation = None
     def __init__(self,roundDto):
         self.roundnum = roundDto['roundNumber']
         self.roundResult = roundDto['roundResult']
@@ -23,6 +25,8 @@ class Round:
         self.__setplantPlayerLocations(roundDto['plantPlayerLocations'])
         self.roundResultCode = roundDto['roundResultCode']
         self.__setplayerRoundStats(roundDto['playerRoundStats'])
+        self.__setdefusePlayerLocations(roundDto['defusePlayerLocations'])
+        self.defuselocation= LocationClasses.Locations(roundDto['defuseLocation']['x'],roundDto['defuseLocation']['y'])
     def __setplayerRoundStats(self,playerRoundStats):
         #assumes roundDto['playerRoundStats'] is a list of playerRoundStats
         #if not, will need to be changed
@@ -37,6 +41,11 @@ class Round:
         for x in playerlocations:
 
             self.plantPlayerLocations.append(LocationClasses.PlayerLocations(playerlocations[x]))
+    def __setdefusePlayerLocations (self,defusePlayerLocations):
+        #assumes defusePlayerLocations is a list of playerlocations
+        #if not, will need to be changed
+        for x in defusePlayerLocations:
+            self.defusePlayerLocations.append(LocationClasses.PlayerLocations(defusePlayerLocations[x]))
 
 class Match:
     matchinfo = None 
