@@ -2,6 +2,7 @@ import json
 import sys
 import getinfo
 import MatchClasses
+import Constants
 
 
 class Account:
@@ -43,3 +44,11 @@ class MatchListEntry:
         self.matchId = matchlistentrydto['matchId']
         self.gameStartTimeMillis = matchlistentrydto['gameStartTimeMillis']
         self.teamId = matchlistentrydto['teamId']
+
+x = getinfo.apihandler(Constants.API_KEY)
+i=0
+while(True):
+    i+=1
+    myacc = Account(x.getvalpuuid("ohmygodarchie","001"),x)
+
+    print(myacc.puuid,i)
