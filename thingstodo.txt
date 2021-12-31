@@ -2,4 +2,4 @@ might need to add an api call to get map stuff
 check out https://dash.valorant-api.com/endpoints/maps
 
 NEED DOCUMENTATION ON EVERYTHING THIS IS SUPPOSED TO DOs
-Rate limiting needs to be figured out
+Rate limiting needs to be figured out       done

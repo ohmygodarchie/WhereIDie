@@ -9,11 +9,11 @@ class apihandler:
     def __init__(self,apikey) -> None:
         self.apikey = apikey 
     
-    MINUTE = 60
+    TWO_MINUTE = 60*2
     @sleep_and_retry
     @limits(calls=20, period=1)
     @sleep_and_retry
-    @limits(calls=100, period=MINUTE*2)
+    @limits(calls=100, period=TWO_MINUTE)
     def response(self,url):
         response = requests.get(url)
         if response.status_code != 200:
