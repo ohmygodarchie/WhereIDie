@@ -9,7 +9,7 @@ class apihandler:
     def __init__(self,apikey) -> None:
         self.apikey = apikey 
     
-    TWO_MINUTE = 60*2
+    TWO_MINUTE = 60*2 + 10
     @sleep_and_retry
     @limits(calls=20, period=1)
     @sleep_and_retry
@@ -17,7 +17,7 @@ class apihandler:
     def response(self,url):
         response = requests.get(url)
         if response.status_code != 200:
-            print("Error: API request unsuccessful.{}".format(response.status_code))
+            print("Error: API request unsuccessful. {}".format(response.status_code))
             sys.exit(1)
         return response.json()
     def urlset(self,reqtype):

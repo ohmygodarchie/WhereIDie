@@ -17,14 +17,15 @@ class Account:
         self.gamename = accountDto["gameName"]
         self.tagline = accountDto["tagLine"]
         self.api = api_obj
-        #matchlistrepsonse = self.api.getmatchlist(self.puuid)
-        #self.matchlist = MatchList(matchlistrepsonse)
-        #self.__populate_listofmatches()
+        matchlistrepsonse = self.api.getmatchlist(self.puuid)
+        self.matchlist = MatchList(matchlistrepsonse)
+        self.__populate_listofmatches()
     def __populate_listofmatches(self):
         #populates actual Match objects for account
         for match in self.matchlist.matchlistentries:
             matchresponse = self.api.getvalmatch(match.matchid)
-            self.listofmatches.append(MatchClasses.Match(matchresponse))
+            self.listofmatches.append(MatchClasses.Match(matchresponse,match))
+        
 class MatchList:
     puuid = ""
     matchlistentries = []
@@ -44,11 +45,11 @@ class MatchListEntry:
         self.matchId = matchlistentrydto['matchId']
         self.gameStartTimeMillis = matchlistentrydto['gameStartTimeMillis']
         self.teamId = matchlistentrydto['teamId']
+##APII rate limiting test
+# x = getinfo.apihandler(Constants.API_KEY)
+# i=0
+# while(True):
+#     i+=1
+#     myacc = Account(x.getvalpuuid("ohmygodarchie","001"),x)
 
-x = getinfo.apihandler(Constants.API_KEY)
-i=0
-while(True):
-    i+=1
-    myacc = Account(x.getvalpuuid("ohmygodarchie","001"),x)
-
-    print(myacc.puuid,i)
+#     print(myacc.puuid,i)

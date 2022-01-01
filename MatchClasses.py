@@ -48,12 +48,21 @@ class Round:
             self.defusePlayerLocations.append(LocationClasses.PlayerLocations(defusePlayerLocations[x]))
 
 class Match:
+    matchlistentry = None
     matchinfo = None 
     players=[] # list of Players
     coaches=[] # list of coaches
     teams = [] #list of teams
     roundresults = [] #list of rounds
-    def __init__(self,matchDto) -> None:
+    #associate a matchlist entry to each match so information can be pulled if needed (e.g. match id, team, start time, etc)
+    def __init__(self,matchDto,matchlistentry) -> None:
+        self.matchinfo = MatchInfo(matchDto['matchInfo'])
+        self.players = self.__setplayers(matchDto['players'])
+        self.coaches = self.__setcoaches(matchDto['coaches'])
+        self.teams = self.__setteams(matchDto['teams'])
+        self.roundresults = self.__setrounds(matchDto['roundResults'])
+        self.matchlistentry = matchlistentry
+    def __init__(self,matchDto):
         self.matchinfo = MatchInfo(matchDto['matchInfo'])
         self.players = self.__setplayers(matchDto['players'])
         self.coaches = self.__setcoaches(matchDto['coaches'])
