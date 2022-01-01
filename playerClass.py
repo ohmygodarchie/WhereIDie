@@ -12,13 +12,13 @@ class Player:
     #can add player card and title can implement later
     def __init__(self, playerdto) -> None:
         self.team = playerdto['teamId']
-        self.agent = playerdto['agentId']
-        self.gamename = playerdto['gameName']
-        self.tagline = playerdto['tagLine']
+        self.agent = playerdto['characterId']
+        #self.gamename = playerdto['gameName']
+        #self.tagline = playerdto['tagLine']
         self.puuid = playerdto['puuid']
         self.partyid = playerdto['partyId']
         self.stats = Stats(playerdto['stats'])
-        self.rank = playerdto['rank']
+        self.rank = playerdto['competitiveTier']
 
     
 class Stats:
@@ -37,8 +37,8 @@ class Stats:
         self.kills = statsdto['kills']
         self.deaths = statsdto['deaths']
         self.assists = statsdto['assists']
-        self.playtime = statsdto['playtime']
-        self.abilitycasts = AbilityCasts(statsdto['abilityCasts'])
+        self.playtime = statsdto['playtimeMillis']
+        #self.abilitycasts = AbilityCasts(statsdto['ability'])   #not in test case
         self.__setkda()
         self.__setkd()
     
@@ -59,12 +59,12 @@ class AbilityCasts:
         self.ability2 = abilitydto['ability2']
         self.ults = abilitydto['ultimateCasts']
      
-class Coach:
-    puuid=0
-    teamId = ""
-    def __init__(self,coachdto) -> None:
-        self.puuid = coachdto['puuid']
-        self.teamId = coachdto['teamId']
+# class Coach:
+#     puuid=0
+#     teamId = ""
+#     def __init__(self,coachdto) -> None:
+#         self.puuid = coachdto['puuid']
+#         self.teamId = coachdto['teamId']
     
 class Team:
     teamname=""
@@ -72,11 +72,13 @@ class Team:
     teamplayers=[]
     matchId=""
     teamcoach = None
-
+    roundsWon = 0
+    teamId = ""
     def __init__(self,teamdto):
-        self.teamid = teamdto['teamId']
-        self.teamname = teamdto['teamName']
-        self.teamtag = teamdto['teamTag']
+        self.teamId = teamdto['teamId']
+        #self.teamname = teamdto['teamName']
+        #self.teamtag = teamdto['teamTag']
+        self.roundsWon = teamdto['roundsWon']
 
     def setTeamPlayer(self,Player):
         self.teamplayers.append(Player)

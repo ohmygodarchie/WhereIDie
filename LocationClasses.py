@@ -2,20 +2,20 @@
 class Locations:
     x=0
     y=0
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    def __init__(self,locationDto):
+        #print(type(locationDto))
+        if 'x' in locationDto:
+            self.x = locationDto["x"]
+        if 'y' in locationDto:
+            self.y = locationDto["y"]
 
 class PlayerLocations:
     puuid=""
     viewRadians=-1
     #list of locations
-    locations = []
+    location = None
     def __init__(self,PlayerLocationsDto):
         self.puuid = PlayerLocationsDto['puuid']
         self.viewRadians= PlayerLocationsDto['viewRadians']
-        self.__setlocations(PlayerLocationsDto['locations'])
-    def __setlocations(self,locations):
-        for x in locations:
-            self.locations.append(Locations(locations[x]['x'],locations[x]['y']))
+        self.location = Locations(PlayerLocationsDto['location'])
     
