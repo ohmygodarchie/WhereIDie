@@ -79,7 +79,11 @@ class Match_Wrapper:
             if player.puuid == puuid:
                 return player.stats
         return None
-    def get_player_kills_per_round(self,puuid):
-        #returns a list of ints
-        pass
-
+    def get_all_kills_in_round(self,roundNum):
+        #returns a list of kills
+        kills = []
+        for x in self.match.rounds[roundNum].playerRoundStats:
+            for y in x.kills:
+                kills.append(y)
+        return kills
+    
