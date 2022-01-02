@@ -13,6 +13,7 @@ class Player:
     def __init__(self, playerdto) -> None:
         self.team = playerdto['teamId']
         self.agent = playerdto['characterId']
+        #these exist but are filtered out of test cases for privacy make sure to add them back in
         #self.gamename = playerdto['gameName']
         #self.tagline = playerdto['tagLine']
         self.puuid = playerdto['puuid']
@@ -38,7 +39,7 @@ class Stats:
         self.deaths = statsdto['deaths']
         self.assists = statsdto['assists']
         self.playtime = statsdto['playtimeMillis']
-        #self.abilitycasts = AbilityCasts(statsdto['ability'])   #not in test case
+        self.abilitycasts = AbilityCasts(statsdto['abilityCasts'])   #only in Match.json testcase
         self.__setkda()
         self.__setkd()
     
@@ -55,8 +56,8 @@ class AbilityCasts:
     ults = 0
     def __init__(self,abilitydto) -> None:
         self.grenadecastse = abilitydto['grenadeCasts']
-        self.ability1 = abilitydto['ability1']
-        self.ability2 = abilitydto['ability2']
+        self.ability1 = abilitydto['ability1Casts']
+        self.ability2 = abilitydto['ability2Casts']
         self.ults = abilitydto['ultimateCasts']
      
 # class Coach:
