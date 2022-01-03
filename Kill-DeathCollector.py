@@ -26,13 +26,14 @@ def main():
         matchresponse = api_handler.getvalmatch(x.matchId)
         match = MatchClasses.Match(matchresponse)
         matchwrapper = MatchWrapper.MatchWrapper(match)
+
         #step 2
         mapId = match.matchinfo.mapId
         gameMode = match.matchinfo.gameMode
         rank = matchwrapper.get_avg_rank()
-        #step 3
-
-        if matchwrapper.get_round_count() >13 and matchwrapper.get_round_count() <19:
+       
+       #filter out games here
+        if matchwrapper.get_round_count() >13 and matchwrapper.get_round_count() <19: #13-6 or less not counted
             continue
         else:
             kills =[]
@@ -42,8 +43,17 @@ def main():
                 else:
                     blue_team_players = team.players
             for i in range(matchwrapper.get_round_count()):
+                #step 3
+                round_economy = matchwrapper.get_avg_economy() #list of ints, index 0 is red team, index 1 is blue team. values are average cost of loadout for all players
+                red_team_econ = matchwrapper.determine_economic_situation(red_team_players,round_economy[0],i)
+                blue_team_econ = matchwrapper.determine_economic_situation(red_team_players,round_economy[1],i)
+                #step 4
                 temp_round = matchwrapper.get_round(i)
                 kills.append(matchwrapper.get_all_kills_in_round(i))
+                #need to figure out how to get kill post or before plant maybe use the time stat but idk
+                
+
+
                 
                 
 

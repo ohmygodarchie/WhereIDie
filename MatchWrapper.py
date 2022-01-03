@@ -99,3 +99,27 @@ class Match_Wrapper:
         for player in self.match.players:
             total += player.stats.rank
         return total/len(self.match.players)
+    def get_avg_economy(self,roundNum):
+        #returns a list of ints, index 0 is red team, index 1 is blue team. values are average cost of loadout for all players
+        # this function can be greatly imporved to determine economic status of each team per round
+        # prob add a function somewhere to determine, pistol, save, half, force, etc.
+        playerroundstats = self.get_all_player_round_stats(roundNum)
+        redTotal = 0
+        blueTotal = 0
+        for x in playerroundstats:
+            if x.team == "RED":
+                redTotal += x.economy.loadoutValue
+            else:
+                blueTotal+= x.economy.loadoutValue
+        return [redTotal/len(playerroundstats),blueTotal/len(playerroundstats)]
+
+    def determine_economic_situation(self, playerroundstats,roundEcon, roundNum): 
+        #need to determine values for save, force, and half
+        if roundNum == 1:
+            return "Pistol"
+        if roundEcon < 0:
+            return "Save"
+        if roundEcon > 0:
+            return "Force"
+        if roundEcon == 0:
+            return "Half"

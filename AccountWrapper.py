@@ -4,7 +4,7 @@ import Constants
 import MatchClasses
 
 #no clue if this needs to exist
-class APIWrapper:
+class AccountWrapper:
     def __init__(self,api_key):
         self.api_key = api_key
         self.api_handler = getinfo.apihandler(api_key)
