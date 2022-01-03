@@ -86,4 +86,16 @@ class Match_Wrapper:
             for y in x.kills:
                 kills.append(y)
         return kills
-    
+    def get_num_of_rounds(self):
+        #returns a int
+        return len(self.match.roundresults)
+    def get_round(self, roundNum):
+        #returns a round object
+        return self.match.roundresults[roundNum]
+
+    def get_avg_rank(self):
+        #returns a int
+        total = 0
+        for player in self.match.players:
+            total += player.stats.rank
+        return total/len(self.match.players)

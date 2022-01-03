@@ -41,3 +41,6 @@ class apihandler:
     def getvalmatch(self,matchid):
         url = self.urlset('/val/match/v1/matches/'+str(matchid))
         return self.response(url)
+    def get_recent_games_by_queue(self,queueId):
+        url = self.urlset('/val/match/v1/recent-matches/by-queue/'+str(queueId))
+        return self.response(url)
