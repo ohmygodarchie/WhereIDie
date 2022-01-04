@@ -115,7 +115,7 @@ class Match_Wrapper:
 
     def determine_economic_situation(self, playerroundstats,roundEcon, roundNum): 
         #need to determine values for save, force, and half
-        if roundNum == 1:
+        if roundNum == 0 or roundNum == 12:
             return "Pistol"
         if roundEcon < 0:
             return "Save"
