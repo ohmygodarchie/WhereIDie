@@ -6,11 +6,12 @@ import json
 import Constants
 import getinfo
 import csv
+import os
 def main():
     for x in range(1):
-        f = open("plant_locations.csv","w")
+        f = open(os.path.dirname(os.get_cwd())+"/testcases/outputs/plant_locations.csv","w")
         writer = csv.writer(f)
-        test = open("Match.json")
+        test = open(os.path.dirname(os.get_cwd())+"/testcasesMatch.json")
         match = MatchClasses.Match(json.load(test))
         matchwrapper = MatchWrapper.Match_Wrapper(match)
         mapId = match.matchinfo.mapId
