@@ -97,7 +97,7 @@ class Match_Wrapper:
         total = 0
         for player in self.match.players:
             total += player.rank
-        return total/len(self.match.players)
+        return total//len(self.match.players)
     def get_all_player_round_stats(self,roundNum):
         #returns a list of playerRoundStats
         return self.match.roundresults[roundNum].playerRoundStats
