@@ -29,12 +29,12 @@ def main():
     # api_handler = getinfo.apihandler(Constants.API_KEY)
     # recentmatch_list = api_handler.get_recent_games_by_queue("COMPETITIVE") #list of matchids
 
-    f = open(os.path.dirname(os.getcwd())+"/testcases/output/recent_games.csv","w")
+    f = open(os.path.dirname(os.getcwd())+"/WhereIDie/testcases/output/recent_games.csv","w")
     writer = csv.writer(f)
     writer.writerow(["map","rank","red_economy","blue_economy","attacker_team","victim_team","attacker_loc_x","attacker_loc_y","victim_loc_x","victim_loc_y"])
     for x in range(1):#recentmatch_list:
         #matchresponse = api_handler.getvalmatch(x.matchId)
-        test = open(os.path.dirname(os.getcwd())+"/testcases/test.json","r")
+        test = open(os.path.dirname(os.getcwd())+"/WhereIDie/testcases/match.json","r")
         
         #match = MatchClasses.Match(matchresponse)
         match = MatchClasses.Match(json.load(test))
