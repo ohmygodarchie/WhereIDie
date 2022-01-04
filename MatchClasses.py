@@ -59,7 +59,7 @@ class Round:
         #if not, will need to be changed
         # no clue how to see round stats for each round yet. does it send each player's stats per round (as in all 10 in the same order every time)?
         for x in playerRoundStats:
-            print("setting player stats for round", self.roundnum)
+            #print("setting player stats for round", self.roundnum)
             self.playerRoundStats.append(KillClass.PlayerRoundStats(x))
 
     def __setplantPlayerLocations(self,playerlocations):
@@ -151,10 +151,10 @@ class MatchInfo:
         self.seasonId = matchInfoDto['seasonId']
 
 
-#test match
-f = open("Match.json")
-match = Match(json.load(f))
-for x in match.players:
-    print(x.puuid , x.team)
-for y in match.roundresults[1].playerRoundStats:
-    print(y.puuid)
+# #test match
+# f = open("Match.json")
+# match = Match(json.load(f))
+# for x in match.players:
+#     print(x.puuid , x.team)
+# for y in match.roundresults[1].playerRoundStats:
+#     print(y.puuid)

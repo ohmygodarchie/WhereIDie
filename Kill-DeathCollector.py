@@ -20,6 +20,9 @@ import csv
 #things in this script can probably be added to match wrapper to clean this up idk
 
 #storage rn is csv file for testing, gonna store in a database later
+
+
+## NEED TO DO, ATTAACKING / DEFENDING NEEDS TO RECOGNIZE FLIP!!!
 def main():
     #step 1
     # api_handler = getinfo.apihandler(Constants.API_KEY)
@@ -40,20 +43,20 @@ def main():
         mapId = match.matchinfo.mapId
         gameMode = match.matchinfo.gameMode
         rank = matchwrapper.get_avg_rank()
-        print(str(mapId))
+        #print(str(mapId))
        #filter out games here
         if matchwrapper.get_num_of_rounds() >13 and matchwrapper.get_num_of_rounds() <19: #13-5 or less not counted
             continue
         else:
             for team in match.teams:
-                print("teams"+str(team.teamId))
+                #print("teams"+str(team.teamId))
                 if team.teamId == "Red":
                     red_team_players = team.teamplayers
                 else:
                     blue_team_players = team.teamplayers
             for i in range(matchwrapper.get_num_of_rounds()):
                 #step 3
-                print(i)
+                #print(i)
                 round_economy = matchwrapper.get_avg_economy(i) #list of ints, index 0 is red team, index 1 is blue team. values are average cost of loadout for all players
                 red_team_econ = matchwrapper.determine_economic_situation(red_team_players,round_economy[0],i)
                 blue_team_econ = matchwrapper.determine_economic_situation(blue_team_players,round_economy[1],i)
@@ -61,7 +64,7 @@ def main():
                 temp_kills = matchwrapper.get_all_kills_in_round(i)
                 for y in temp_kills:
                     kill_tag = ""
-                    print(y.killer)
+                    #print(y.killer)
                     if y.timeSinceRoundStart<matchwrapper.get_round_plant_time(i):
                         kill_tag = "before plant"
                     else:
@@ -69,10 +72,10 @@ def main():
                     attacker_team = matchwrapper.get_player_team(y.killer)
                     victim_team = matchwrapper.get_player_team(y.victim)
                     for z in y.playerLocations:
-                        print("looking for attacker location")
+                        #print("looking for attacker location")
                         if z.puuid == y.killer:
                             attacker_location = z.location
-                            print("found attacker location", type(attacker_location))
+                            #print("found attacker location", type(attacker_location))
                     write_Arr = [mapId,gameMode,rank,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location.x,attacker_location.y,y.victimLocation.x,y.victimLocation.y,kill_tag]
                     writer.writerow(write_Arr)
         f.close()
