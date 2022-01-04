@@ -2,16 +2,18 @@ import LocationClasses
 import OtherClasses
 
 class PlayerRoundStats:
-    puuid = ""
-    kills= [] #list of kill objects
-    damage =[] # list of damage objects
-    score=-1
-    economy=None
-    ability=None
+    # puuid = ""
+    # kills= [] #list of kill objects
+    # damage =[] # list of damage objects
+    # score=-1
+    # economy=None
+    # ability=None
 
     def __init__(self,playerRoundStatsDto):
         self.puuid = playerRoundStatsDto['puuid']
         self.score = playerRoundStatsDto['score']
+        self.kills=[]
+        self.damager =[]
         self.__setkills(playerRoundStatsDto['kills'])
         self.__setdamage(playerRoundStatsDto['damage'])
         self.economy = OtherClasses.Economy(playerRoundStatsDto['economy'])
@@ -26,8 +28,8 @@ class PlayerRoundStats:
 
 
 class Damage:
-    receiverpuuid = ""
-    damage = []
+    # receiverpuuid = ""
+    # damage = []
     def __init__(self,damageDto):
         self.puuid = damageDto['receiver']
         self.damage = damageDto['damage']
@@ -36,16 +38,22 @@ class Damage:
         self.bodyshots = damageDto['bodyshots']
 
 class Kill:
-    killer ="" #puuid of killer
-    victim = "" #puuid of victim
-    victimLocation = None #LocationHandler.Locations
-    assistants = [] #list of puuids
-    playerLocations = [] #list of LocationHandler.PlayerLocations
-    finishingdamage = None
+    # killer ="" #puuid of killer
+    # victim = "" #puuid of victim
+    # victimLocation = None #LocationHandler.Locations
+    # timeSinceRoundStart = -1
+    # timeSinceGameStart = -1
+    # assistants = [] #list of puuids
+    # playerLocations = [] #list of LocationHandler.PlayerLocations
+    # finishingdamage = None
     def __init__(self,killDto):
         self.killer = killDto['killer']
         self.victim = killDto['victim']
         self.victimLocation = LocationClasses.Locations(killDto['victimLocation'])
+        self.timeSinceRoundStart = killDto['timeSinceRoundStartMillis']
+        self.timeSinceGameStart = killDto['timeSinceGameStartMillis']
+        self.assistants =[]
+        self.playerLocations = []
         self.__setassistants(killDto['assistants'])
         self.__setplayerLocations(killDto['playerLocations'])
         self.finishingdamage = FinishingDamage(killDto['finishingDamage'])
@@ -58,9 +66,9 @@ class Kill:
             self.playerLocations.append(LocationClasses.PlayerLocations(x))
 
 class FinishingDamage:
-    damageType = ""
-    damageItem = ""
-    isSecondaryFireMode=False
+    # damageType = ""
+    # damageItem = ""
+    # isSecondaryFireMode=False
     def __init__(self,finishingdamageDto):
         self.damageType = finishingdamageDto['damageType']
         self.damageItem = finishingdamageDto['damageItem']

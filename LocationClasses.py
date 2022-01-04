@@ -1,7 +1,5 @@
 
 class Locations:
-    x=0
-    y=0
     def __init__(self,locationDto):
         #print(type(locationDto))
         if 'x' in locationDto:
@@ -10,10 +8,10 @@ class Locations:
             self.y = locationDto["y"]
 
 class PlayerLocations:
-    puuid=""
-    viewRadians=-1
+    # puuid=""
+    # viewRadians=-1
     #list of locations
-    location = None
+    # location = None
     def __init__(self,PlayerLocationsDto):
         self.puuid = PlayerLocationsDto['puuid']
         self.viewRadians= PlayerLocationsDto['viewRadians']

@@ -3,25 +3,27 @@ import LocationClasses
 import KillClass
 import json
 class Round:
-    roundnum=-1
-    roundResult=""
-    roundCeremony=""
-    winningTeam=""
-    bombPlanter="" #puuid
-    bombDefuser = "" #puuid
-    plantRoundTime = -1
-    plantPlayerLocations = [] 
-    playerRoundStats = [] #playerRoundStats in KillClass.py
-    roundResultCode =""
-    defusePlayerLocations = []
-    defuseLocation = None
-    plantLocation = None
+    # roundnum=-1
+    # roundResult=""
+    # roundCeremony=""
+    # winningTeam=""
+    # bombPlanter="" #puuid
+    # bombDefuser = "" #puuid
+    # plantRoundTime = -1
+    # plantPlayerLocations = [] 
+    # playerRoundStats = [] #playerRoundStats in KillClass.py
+    # roundResultCode =""
+    # defusePlayerLocations = []
+    # defuseLocation = None
+    # plantLocation = None
     def __init__(self,roundDto):
         self.roundnum = roundDto['roundNum']
         self.roundResult = roundDto['roundResult']
         self.roundCeremony = roundDto['roundCeremony']
         self.winningTeam = roundDto['winningTeam']
-
+        self.playerRoundStats=[]
+        self.plantPlayerLocations=[]
+        self.defusePlayerLocations=[]
         if 'bombPlanter' in roundDto:
             self.bombPlanter = roundDto['bombPlanter']
 
@@ -57,6 +59,7 @@ class Round:
         #if not, will need to be changed
         # no clue how to see round stats for each round yet. does it send each player's stats per round (as in all 10 in the same order every time)?
         for x in playerRoundStats:
+            print("setting player stats for round", self.roundnum)
             self.playerRoundStats.append(KillClass.PlayerRoundStats(x))
 
     def __setplantPlayerLocations(self,playerlocations):
@@ -71,14 +74,15 @@ class Round:
             self.defusePlayerLocations.append(LocationClasses.PlayerLocations(x))
 
 class Match:
-    matchlistentry = None
-    matchinfo = None 
-    players=[] # list of Players
+    #players=[] # list of Players
     #coaches=[] # list of coaches
-    teams = [] #list of teams
-    roundresults = [] #list of rounds
+    # teams = [] #list of teams
+    # roundresults = [] #list of rounds
     #associate a matchlist entry to each match so information can be pulled if needed (e.g. match id, team, start time, etc)
     def __init__(self,matchDto,matchlistentry) -> None:
+        self.players =[]
+        self.teams=[]
+        self.roundresults=[]
         self.matchinfo = MatchInfo(matchDto['matchInfo'])
         self.players = self.__setplayers(matchDto['players'])
         self.coaches = self.__setcoaches(matchDto['coaches'])
@@ -87,6 +91,9 @@ class Match:
         self.matchlistentry = matchlistentry
         self.assignPlayerstoTeams()
     def __init__(self,matchDto):
+        self.players =[]
+        self.teams=[]
+        self.roundresults=[]
         self.matchinfo = MatchInfo(matchDto['matchInfo'])
         self.__setplayers(matchDto['players'])
         self.__setteams(matchDto['teams'])
@@ -130,17 +137,6 @@ class Match:
                     x.setTeamCoach(y)
 
 class MatchInfo:
-    matchId = ""
-    mapId = ""
-    gameLengthMillis = -1
-    gameStartMillis = -1
-    provisioningFlowId = ""
-    IsCompleted = False
-    customGameName = ""
-    queueId=""
-    gameMode = ""
-    isRanked = False
-    seasonId = ""
     def __init__(self,matchInfoDto):
         self.matchId = matchInfoDto['matchId']
         self.mapId = matchInfoDto['mapId']
@@ -160,3 +156,5 @@ f = open("Match.json")
 match = Match(json.load(f))
 for x in match.players:
     print(x.puuid , x.team)
+for y in match.roundresults[1].playerRoundStats:
+    print(y.puuid)

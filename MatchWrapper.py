@@ -1,51 +1,50 @@
 import MatchClasses
 class Match_Wrapper:
-    match = None
     def __init__(self,match):
         self.match = match
     #returns a location object, (0,0) mean bomb was not planted
     #roundnumber is indexed from 0
     def get_round_plant_location(self,roundNum):
         #returns a location object
-        return self.match.rounds[roundNum].plantLocation
+        return self.match.roundresults[roundNum].plantLocation
 
     def get_round_defuse_location(self,roundNum):
         #returns a location object
-        return self.match.rounds[roundNum].defuseLocation
+        return self.match.roundresults[roundNum].defuseLocation
 
     def get_round_plant_player_locations(self,roundNum):
         #returns a list of location objects
-        return self.match.rounds[roundNum].defusePlayerLocations
+        return self.match.roundresults[roundNum].defusePlayerLocations
     
     def get_round_defuse_player_locations(self,roundNum):
         #returns a list of location objects
-        return self.match.rounds[roundNum].defusePlayerLocations
+        return self.match.roundresults[roundNum].defusePlayerLocations
 
     def get_round_plant_time(self,roundNum):
         #returns a int in miliseconds, 0 if no bomb was planted
-        return self.match.rounds[roundNum].plantTime
+        return self.match.roundresults[roundNum].plantRoundTime
     
     def get_round_defuse_time(self,roundNum):
         #returns a int in miliseconds, 0 if no bomb was defused
-        return self.match.rounds[roundNum].defuseTime
+        return self.match.roundresults[roundNum].defuseTime
 
     def get_round_planter(self,roundNum):
         #returns a string puuid
-        if self.match.rounds[roundNum].bombPlanter =="":
+        if self.match.roundresults[roundNum].bombPlanter =="":
             return "None"
-        return self.match.rounds[roundNum].bombPlanter
+        return self.match.roundresults[roundNum].bombPlanter
 
     def get_round_defuser(self,roundNum):
         #returns a string puuid
-        if self.match.rounds[roundNum].bombDefuser =="":
+        if self.match.roundresults[roundNum].bombDefuser =="":
             return "None"
-        return self.match.rounds[roundNum].bombDefuser
+        return self.match.roundresults[roundNum].bombDefuser
     def get_round_result(self,roundNum):
         #returns a string
-        return self.match.rounds[roundNum].roundResult
+        return self.match.roundresults[roundNum].roundResult
     def get_round_ceremony(self,roundNum):
         #returns a string
-        return self.match.rounds[roundNum].roundCeremony
+        return self.match.roundresults[roundNum].roundCeremony
     def get_round_result_code(self,roundNum):
         #returns a string
         return self.match.rounds[roundNum].roundResultCode
@@ -82,7 +81,7 @@ class Match_Wrapper:
     def get_all_kills_in_round(self,roundNum):
         #returns a list of kills
         kills = []
-        for x in self.match.rounds[roundNum].playerRoundStats:
+        for x in self.match.roundresults[roundNum].playerRoundStats:
             for y in x.kills:
                 kills.append(y)
         return kills
@@ -97,8 +96,11 @@ class Match_Wrapper:
         #returns a int
         total = 0
         for player in self.match.players:
-            total += player.stats.rank
+            total += player.rank
         return total/len(self.match.players)
+    def get_all_player_round_stats(self,roundNum):
+        #returns a list of playerRoundStats
+        return self.match.roundresults[roundNum].playerRoundStats
     def get_avg_economy(self,roundNum):
         #returns a list of ints, index 0 is red team, index 1 is blue team. values are average cost of loadout for all players
         # this function can be greatly imporved to determine economic status of each team per round
@@ -107,7 +109,7 @@ class Match_Wrapper:
         redTotal = 0
         blueTotal = 0
         for x in playerroundstats:
-            if x.team == "RED":
+            if self.get_player_team(x.puuid).upper() == "RED":
                 redTotal += x.economy.loadoutValue
             else:
                 blueTotal+= x.economy.loadoutValue
@@ -123,3 +125,9 @@ class Match_Wrapper:
             return "Force"
         if roundEcon == 0:
             return "Half"
+    def get_player_team(self,puuid):
+        #returns a string
+        for player in self.match.players:
+            if player.puuid == puuid:
+                return player.team
+        return None

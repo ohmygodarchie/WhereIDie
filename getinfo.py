@@ -5,7 +5,7 @@ from ratelimit import limits, sleep_and_retry
 
 #make a request to the API
 class apihandler:
-    apikey=''
+    # apikey=''
     def __init__(self,apikey) -> None:
         self.apikey = apikey 
     

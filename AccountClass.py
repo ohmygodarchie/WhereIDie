@@ -6,18 +6,19 @@ import Constants
 
 
 class Account:
-    puuid="" 
-    gamename=""
-    tagline=""
-    matchlist = None
-    listofmatches = []
-    api=None
+    # puuid="" 
+    # gamename=""
+    # tagline=""
+    # matchlist = None
+    # listofmatches = []
+    # api=None
     def __init__(self,accountDto,api_obj):
         self.puuid = accountDto["puuid"]
         self.gamename = accountDto["gameName"]
         self.tagline = accountDto["tagLine"]
         self.api = api_obj
         matchlistrepsonse = self.api.getmatchlist(self.puuid)
+        self.listofmatches=[]
         self.matchlist = MatchList(matchlistrepsonse)
         self.__populate_listofmatches()
     def __populate_listofmatches(self):
@@ -27,10 +28,11 @@ class Account:
             self.listofmatches.append(MatchClasses.Match(matchresponse,match))
         
 class MatchList:
-    puuid = ""
-    matchlistentries = []
+    # puuid = ""
+    # matchlistentries = []
     def __init__(self,matchlistdto) -> None:
         self.puuid = matchlistdto['puuid']
+        self.matchlistentries=[]
         self.__setmatchlist(matchlistdto['history'])
     def __setmatchlist(self,matchlistdto):
         #populates matchlist entry objects to list
@@ -38,9 +40,9 @@ class MatchList:
             self.matchlistentries.append(MatchListEntry(matchlistentry))
 
 class MatchListEntry:
-    matchId=""
-    gameStartTimeMillis =-1
-    teamId = ""
+    # matchId=""
+    # gameStartTimeMillis =-1
+    # teamId = ""
     def __init__(self,matchlistentrydto) -> None:
         self.matchId = matchlistentrydto['matchId']
         self.gameStartTimeMillis = matchlistentrydto['gameStartTimeMillis']
