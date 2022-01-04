@@ -13,7 +13,7 @@ class PlayerRoundStats:
         self.puuid = playerRoundStatsDto['puuid']
         self.score = playerRoundStatsDto['score']
         self.kills=[]
-        self.damager =[]
+        self.damage =[]
         self.__setkills(playerRoundStatsDto['kills'])
         self.__setdamage(playerRoundStatsDto['damage'])
         self.economy = OtherClasses.Economy(playerRoundStatsDto['economy'])
