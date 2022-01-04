@@ -68,13 +68,13 @@ def main():
                         kill_tag = "after plant"
                     attacker_team = matchwrapper.get_player_team(y.killer)
                     victim_team = matchwrapper.get_player_team(y.victim)
-                    attacker_location = None
                     for z in y.playerLocations:
                         print("looking for attacker location")
                         if z.puuid == y.killer:
                             attacker_location = z.location
-                    
-                    writer.writerow([mapId,gameMode,rank,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location.x,attacker_location.y,y.victimLocation.x,y.victimLocation.y,kill_tag])
+                            print("found attacker location", type(attacker_location))
+                    write_Arr = [mapId,gameMode,rank,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location.x,attacker_location.y,y.victimLocation.x,y.victimLocation.y,kill_tag]
+                    writer.writerow(write_Arr)
         f.close()
         test.close()
 

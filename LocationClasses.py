@@ -2,10 +2,8 @@
 class Locations:
     def __init__(self,locationDto):
         #print(type(locationDto))
-        if 'x' in locationDto:
-            self.x = locationDto["x"]
-        if 'y' in locationDto:
-            self.y = locationDto["y"]
+        self.x = locationDto['x']
+        self.y = locationDto['y']
 
 class PlayerLocations:
     # puuid=""
