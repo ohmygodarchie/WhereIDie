@@ -111,7 +111,7 @@ class Match_Wrapper:
                 redTotal += x.economy.loadoutValue
             else:
                 blueTotal+= x.economy.loadoutValue
-        return [redTotal/len(playerroundstats),blueTotal/len(playerroundstats)]
+        return [redTotal/5,blueTotal/5]
 
     def determine_economic_situation(self, playerroundstats,roundEcon, roundNum): 
         #need to determine values for save, force, and half
