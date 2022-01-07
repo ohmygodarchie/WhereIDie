@@ -1,3 +1,6 @@
+import Constants
+import getinfo
+
 class Economy:
     loadoutValue = -1
     weapon= ""
@@ -20,3 +23,7 @@ class Ability:
         self.ability1Effects = abilityDto['ability1Effects']
         self.ability2Effects = abilityDto['ability2Effects']
         self.ultimateEffects = abilityDto['ultimateEffects']
+#make weapoon class for econ calculations
+class Weapon:
+    def __init__(self,id):
+        self.id = id
