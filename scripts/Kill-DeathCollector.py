@@ -50,17 +50,19 @@ def main():
             continue
         else:
             for team in match.teams:
-                #print("teams"+str(team.teamId))
-                if team.teamId == "Red":
+                print("teams"+str(team.teamId))
+                if team.teamId.upper() == "Red".upper():
+                    print(team.teamplayers)
                     red_team_players = team.teamplayers
                 else:
                     blue_team_players = team.teamplayers
+            print(blue_team_players,red_team_players)
             for i in range(matchwrapper.get_num_of_rounds()):
                 #step 3
                 #print(i)
                 round_economy = matchwrapper.get_avg_economy(i) #list of ints, index 0 is red team, index 1 is blue team. values are average cost of loadout for all players
-                red_team_econ = matchwrapper.determine_economic_situation(red_team_players,round_economy[0],i)
-                blue_team_econ = matchwrapper.determine_economic_situation(blue_team_players,round_economy[1],i)
+                red_team_econ = matchwrapper.determine_economic_situation(red_team_players, round_economy[0],i, "RED")
+                blue_team_econ = matchwrapper.determine_economic_situation(blue_team_players, round_economy[1],i, "BLUE")
                 #step 4
                 temp_kills = matchwrapper.get_all_kills_in_round(i)
                 for y in temp_kills:

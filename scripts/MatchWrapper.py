@@ -115,16 +115,51 @@ class Match_Wrapper:
                 blueTotal+= x.economy.loadoutValue
         return [redTotal/5,blueTotal/5]
 
-    def determine_economic_situation(self, playerroundstats,roundEcon, roundNum): 
+    def determine_economic_situation(self,players,roundEcon, roundNum, team): 
         #need to determine values for save, force, and half
+
+        ##  0  = save 1 = force 2 = half 3 = full
+        team_econ = []
         if roundNum == 0 or roundNum == 12:
             return "Pistol"
-        if roundEcon < 0:
+        red_team =[]
+        blue_team = []
+        for y in self.match.roundresults[roundNum].playerRoundStats:
+            for z in players:
+                if y.puuid == z.puuid:
+                    if z.team.upper() == "Red".upper():
+                        red_team.append(y)
+                    else:
+                        blue_team.append(y)
+        if team.upper() == "RED":
+            playerroundstats = red_team
+        else:
+            playerroundstats = blue_team
+        for x in playerroundstats:
+            if x.economy.loadoutValue <= 3900 and x.economy.loadoutValue >= 2400:
+                team_econ.append(2)
+            elif x.economy.loadoutValue>=3900:
+                team_econ.append(3)
+            elif x.economy.loadoutValue<=2400 and x.economy.remaining + 1300 <=3900:
+                team_econ.append(1)
+            else:
+                # elif x.economy.loadoutValue <=1900:
+                team_econ.append(0)
+        avg_loadout = 0
+        print(team_econ, playerroundstats)
+        for y in team_econ:
+            avg_loadout += y
+        avg_loadout = round(avg_loadout/len(team_econ))
+        if avg_loadout == 0:
             return "Save"
-        if roundEcon > 0:
+        elif avg_loadout == 1:
             return "Force"
-        if roundEcon == 0:
+        elif avg_loadout == 2:
             return "Half"
+        elif avg_loadout == 3:
+            return "Full"
+        else:
+            return "unknown"
     def get_player_team(self,puuid):
         #returns a string
         for player in self.match.players:
