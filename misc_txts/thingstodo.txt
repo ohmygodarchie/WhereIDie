@@ -7,3 +7,7 @@ Rate limiting needs to be figured out       done-ish?? pretty inconsistent
 maybe all this api work was for nothing bc other packages do it. however they dont do it like im doing is so imma leave it
 
 gotta get a V1.0 DOCUMENTATION written. prob just gonna be heat map overlays matched against economics 
+
+gotta account for sides switching on collectors.
+MYSQL stuff needs work
+check line 1 
