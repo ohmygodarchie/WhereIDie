@@ -59,13 +59,10 @@ def main():
             sql = "INSERT INTO kd_collector_"+mapName+" (queueid,rank_id,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location_x,attacker_location_y,victim_location_x,victim_location_y,plant_status) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
             for team in match.teams:
-                print("teams"+str(team.teamId))
                 if team.teamId.upper() == "Red".upper():
-                    print(team.teamplayers)
                     red_team_players = team.teamplayers
                 else:
                     blue_team_players = team.teamplayers
-            print(blue_team_players,red_team_players)
             for i in range(matchwrapper.get_num_of_rounds()):
                 #step 3
                 #print(i)

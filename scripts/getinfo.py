@@ -50,7 +50,6 @@ class apihandler:
         url = 'https://na.api.riotgames.com/val/content/v1/contents?locale=en-US&api_key=' + self.apikey
         response = self.response(url)
         for x in response['maps']:
-            print(type(x))
             try:
                 Constants.MAPS[x['assetPath']] = x['name']
             except KeyError:

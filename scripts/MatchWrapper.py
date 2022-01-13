@@ -150,7 +150,6 @@ class Match_Wrapper:
                 # elif x.economy.loadoutValue <=1900:
                 team_econ.append(0)
         avg_loadout = 0
-        print(team_econ, playerroundstats)
         for y in team_econ:
             avg_loadout += y
         avg_loadout = round(avg_loadout/len(team_econ))

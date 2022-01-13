@@ -126,7 +126,6 @@ class Match:
         for x in self.teams:
             for y in self.players:
                 if x.teamId.upper()== y.team.upper():
-                    print("here")
                     x.setTeamPlayer(y)
     def assignCoachesToTeams(self):
         #assumes teams and coaches are populated
