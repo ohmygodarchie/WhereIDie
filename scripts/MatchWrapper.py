@@ -1,7 +1,11 @@
 import MatchClasses
+import Constants
+import getinfo
 class Match_Wrapper:
     def __init__(self,match):
         self.match = match
+        self.api = getinfo.apihandler()
+        self.api.get_content()
     #returns a location object, (0,0) mean bomb was not planted
     #roundnumber is indexed from 0
     def get_round_plant_location(self,roundNum):
@@ -166,3 +170,10 @@ class Match_Wrapper:
             if player.puuid == puuid:
                 return player.team
         return None
+    def get_map_name(self,mapid):
+        #returns a string
+        return Constants.MAPS[mapid]
+    def get_agent_name(self,agentid):
+        #returns a string
+        return Constants.AGENTS[agentid]
+    

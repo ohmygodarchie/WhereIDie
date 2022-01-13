@@ -2,9 +2,9 @@ import MatchWrapper
 import MatchClasses
 import json
 import Constants
-import getinfo
 import csv
 import os
+import mysql.connector
 ## Kill death collector is going to be a script that will scan the recent games and strictly collect the kills and locations of the kills
 ## will probably need to filter out the matches that are not ranked and matches that are not close (13-0 , 13-6 will not be collected as they are not representative)
 ## will need to collect ranks to see differences between rank play style
@@ -24,14 +24,20 @@ import os
 
 
 ## NEED TO DO, ATTAACKING / DEFENDING NEEDS TO RECOGNIZE FLIP!!!
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password=Constants.MYSQL_PASSWORD,
+  database="whereidie"
+)
+
 def main():
     #step 1
     # api_handler = getinfo.apihandler(Constants.API_KEY)
     # recentmatch_list = api_handler.get_recent_games_by_queue("COMPETITIVE") #list of matchids
+    mycursor = mydb.cursor()
 
-    f = open(os.path.dirname(os.getcwd())+"/WhereIDie/testcases/output/recent_games.csv","w")
-    writer = csv.writer(f)
-    writer.writerow(["map","rank","red_economy","blue_economy","attacker_team","victim_team","attacker_loc_x","attacker_loc_y","victim_loc_x","victim_loc_y"])
     for x in range(1):#recentmatch_list:
         #matchresponse = api_handler.getvalmatch(x.matchId)
         test = open(os.path.dirname(os.getcwd())+"/WhereIDie/testcases/match.json","r")
@@ -44,11 +50,14 @@ def main():
         mapId = match.matchinfo.mapId
         queueId = match.matchinfo.queueId
         rank = matchwrapper.get_avg_rank()
-        #print(str(mapId))
        #filter out games here
         if matchwrapper.get_num_of_rounds() >13 and matchwrapper.get_num_of_rounds() <19: #13-5 or less not counted
             continue
+        
         else:
+            mapName = matchwrapper.get_map_name(mapId).upper()
+            sql = "INSERT INTO kd_collector_"+mapName+" (queueid,rank_id,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location_x,attacker_location_y,victim_location_x,victim_location_y,plant_status) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
             for team in match.teams:
                 print("teams"+str(team.teamId))
                 if team.teamId.upper() == "Red".upper():
@@ -79,9 +88,10 @@ def main():
                         if z.puuid == y.killer:
                             attacker_location = z.location
                             #print("found attacker location", type(attacker_location))
-                    write_Arr = [mapId,queueId,rank,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location.x,attacker_location.y,y.victimLocation.x,y.victimLocation.y,kill_tag]
-                    writer.writerow(write_Arr)
-        f.close()
+                    #step 5
+                    vals = (queueId,rank,red_team_econ,blue_team_econ,attacker_team,victim_team,attacker_location.x,attacker_location.y,y.victimLocation.x,y.victimLocation.y,kill_tag)
+                    mycursor.execute(sql, vals)
+                    mydb.commit()
         test.close()
 
                 #need to figure out how to get kill post or before plant maybe use the time stat but idk

@@ -2,12 +2,14 @@ import json
 import requests
 import sys
 from ratelimit import limits, sleep_and_retry
+from requests.models import Response
+import Constants
 
 #make a request to the API
 class apihandler:
-    # apikey=''
-    def __init__(self,apikey) -> None:
-        self.apikey = apikey 
+    apikey=Constants.API_KEY
+    def __init__(self) -> None:
+        pass
     
     TWO_MINUTE = 60*2 + 10
     @sleep_and_retry
@@ -44,3 +46,17 @@ class apihandler:
     def get_recent_games_by_queue(self,queueId):
         url = self.urlset('/val/match/v1/recent-matches/by-queue/'+str(queueId))
         return self.response(url)
+    def get_content(self):
+        url = 'https://na.api.riotgames.com/val/content/v1/contents?locale=en-US&api_key=' + self.apikey
+        response = self.response(url)
+        for x in response['maps']:
+            print(type(x))
+            try:
+                Constants.MAPS[x['assetPath']] = x['name']
+            except KeyError:
+                continue
+        for x in response['characters']:
+            Constants.AGENTS[x['id']] = x['name']
+        
+        for x in response['equips']:
+            Constants.WEAPONS[x['id']] = x['name']
