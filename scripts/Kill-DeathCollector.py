@@ -20,7 +20,7 @@ import os
 #this is super inefficient but it works maybe????? its like 4 loops but its basically constants so maybe we can pretend its O(1)
 #things in this script can probably be added to match wrapper to clean this up idk
 
-#storage rn is csv file for testing, gonna store in a database later
+#storage rn is csv file for testing, gonna store in a database later -- DONE STORING IN DB
 
 
 ## NEED TO DO, ATTAACKING / DEFENDING NEEDS TO RECOGNIZE FLIP!!!
