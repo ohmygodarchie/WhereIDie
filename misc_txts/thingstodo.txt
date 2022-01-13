@@ -9,5 +9,5 @@ maybe all this api work was for nothing bc other packages do it. however they do
 gotta get a V1.0 DOCUMENTATION written. prob just gonna be heat map overlays matched against economics 
 
 gotta account for sides switching on collectors.
-MYSQL stuff needs work
+MYSQL stuff needs work ---- DONE ish??? its all going to the right sql table so ig its time for front end
 check line 1 
