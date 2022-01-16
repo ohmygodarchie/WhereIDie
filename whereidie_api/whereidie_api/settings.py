@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from asyncio.proactor_events import constants
 from pathlib import Path
+from . import constant_keys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vz1(hq8*@7prt-3wc7$(w-@n^z^!q__3@cg89-e-k64h9kq0_b'
+# SECRET_KEY = 'django-insecure-vz1(hq8*@7prt-3wc7$(w-@n^z^!q__3@cg89-e-k64h9kq0_b'
+SECRET_KEY = constant_keys.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
