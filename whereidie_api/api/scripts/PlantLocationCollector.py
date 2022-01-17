@@ -2,10 +2,10 @@
 ##going to collect plant locations, rank, map and economy
 
 ## NEED TO FLIP TEAMS
-from . import MatchWrapper
-from . import MatchClasses
+import MatchWrapper
+import MatchClasses
 import json
-from . import Constants
+import Constants
 import os
 import mysql.connector
 

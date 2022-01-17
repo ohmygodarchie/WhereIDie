@@ -1,7 +1,7 @@
-from . import getinfo
-from . import AccountClass
-from . import Constants
-from . import MatchClasses
+import getinfo
+import AccountClass
+import Constants
+import MatchClasses
 
 #no clue if this needs to exist
 class AccountWrapper:

@@ -2,7 +2,7 @@ import json
 import requests
 import sys
 from ratelimit import limits, sleep_and_retry
-from . import Constants
+import Constants
 
 #make a request to the API
 class apihandler:

@@ -1,6 +1,6 @@
-from . import playerClass
-from . import LocationClasses
-from . import KillClass
+import playerClass
+import LocationClasses
+import KillClass
 import json
 class Round:
     # roundnum=-1

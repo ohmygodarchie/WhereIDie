@@ -1,8 +1,8 @@
 import json
 import sys
-from . import getinfo
-from . import MatchClasses
-from . import Constants
+import getinfo
+import MatchClasses
+import Constants
 
 
 class Account:

@@ -1,5 +1,5 @@
-from . import LocationClasses
-from . import OtherClasses
+import LocationClasses
+import OtherClasses
 
 class PlayerRoundStats:
     # puuid = ""

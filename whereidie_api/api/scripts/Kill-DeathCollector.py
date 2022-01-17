@@ -1,7 +1,7 @@
-from . import MatchWrapper
-from . import MatchClasses
+import MatchWrapper
+import MatchClasses
 import json
-from . import Constants
+import Constants
 import csv
 import os
 import mysql.connector

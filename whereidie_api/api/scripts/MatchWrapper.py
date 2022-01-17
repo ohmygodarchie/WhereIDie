@@ -1,6 +1,6 @@
-from . import MatchClasses
-from . import Constants
-from . import getinfo
+import MatchClasses
+import Constants
+import getinfo
 class Match_Wrapper:
     def __init__(self,match):
         self.match = match
