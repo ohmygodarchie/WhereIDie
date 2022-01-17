@@ -1,11 +1,11 @@
-import MatchClasses
-import Constants
-import getinfo
+from . import MatchClasses
+from . import Constants
+from . import getinfo
 class Match_Wrapper:
     def __init__(self,match):
         self.match = match
         self.api = getinfo.apihandler()
-        self.api.get_content()
+        
     #returns a location object, (0,0) mean bomb was not planted
     #roundnumber is indexed from 0
     def get_round_plant_location(self,roundNum):
@@ -141,14 +141,14 @@ class Match_Wrapper:
             playerroundstats = blue_team
         for x in playerroundstats:
             if x.economy.loadoutValue <= 3900 and x.economy.loadoutValue >= 2400:
-                team_econ.append(2)
+                team_econ.append(2) #half
             elif x.economy.loadoutValue>=3900:
-                team_econ.append(3)
+                team_econ.append(3) #full
             elif x.economy.loadoutValue<=2400 and x.economy.remaining + 1300 <=3900:
-                team_econ.append(1)
+                team_econ.append(1) #force
             else:
                 # elif x.economy.loadoutValue <=1900:
-                team_econ.append(0)
+                team_econ.append(0) #save
         avg_loadout = 0
         for y in team_econ:
             avg_loadout += y

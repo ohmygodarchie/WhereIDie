@@ -2,14 +2,13 @@ import json
 import requests
 import sys
 from ratelimit import limits, sleep_and_retry
-from requests.models import Response
-import Constants
+from . import Constants
 
 #make a request to the API
 class apihandler:
     apikey=Constants.API_KEY
     def __init__(self) -> None:
-        pass
+        self.get_content()
     
     TWO_MINUTE = 60*2 + 10
     @sleep_and_retry

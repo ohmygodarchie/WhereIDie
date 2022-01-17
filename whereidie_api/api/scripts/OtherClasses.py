@@ -1,5 +1,5 @@
-import Constants
-import getinfo
+from . import Constants
+from . import getinfo
 
 class Economy:
     loadoutValue = -1
