@@ -1,4 +1,8 @@
 #query sql database for map, queue, rank, and econ
+
+#ASYNC is so hard might switch to sync
+#remember to add offsets etc with the data (MAYBE DO THIS IN COLLECTORS)
+
 from .scripts import Constants
 import inspect
 #from django.db import models
