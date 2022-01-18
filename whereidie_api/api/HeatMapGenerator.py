@@ -11,30 +11,31 @@ from asgiref.sync import sync_to_async
 def create_models(db_table):
     classvar = None
     if db_table == "kd_collector_ASCENT":
-        classvar = models.KdCollectorAscent()
+        classvar = models.KdCollectorAscent.objects
     elif db_table == "kd_collector_BIND":
-        classvar = models.KdCollectorBind()
+        classvar = models.KdCollectorBind.objects
     elif db_table == "kd_collector_BREEZE":
-        classvar = models.KdCollectorBreeze()
+        classvar = models.KdCollectorBreeze.objects
     elif db_table == "kd_collector_FRACTURE":
-        classvar = models.KdCollectorFracture()
+        classvar = models.KdCollectorFracture.objects
     elif db_table  == "kd_collector_SPLIT":
-        classvar = models.KdCollectorSplit()
+        classvar = models.KdCollectorSplit.objects
     elif db_table == "kd_collector_HAVEN":
-        classvar = models.KdCollectorHaven()
+        classvar = models.KdCollectorHaven.objects
     elif db_table == "kd_collector_ICEBOX":
-        classvar = models.KdCollectorIcebox()
+        classvar = models.KdCollectorIcebox.objects
     else:
         print("Error: Invalid db_table")
         return
     return classvar
 
-async def generate_heatmaps():
+def generate_heatmaps():
     list_of_models = inspect.getmembers(models)
     print(list_of_models) 
     for x in Constants.MAPS.values():
         db_table = "kd_collector_"+ x.upper()
         classvar = create_models(db_table)
-        all_objs = await sync_to_async(classvar.objects.all)()
+        print(type(classvar))
+        all_objs =  classvar.all()
         for x in all_objs:
             print(x)

@@ -10,12 +10,12 @@ from . import HeatMapGenerator
 #just a hello world func
 
 api = getinfo.apihandler()
-async def index(request):
+def index(request):
     return HttpResponse("hello world")
 
 
 #compile heatmap data
-async def getHeatMap(request,MAP, atk_econ, def_econ):
+def getHeatMap(request,MAP, atk_econ, def_econ):
     if MAP not in Constants.MAPS.values():
         return HttpResponseNotFound('404 Not Found')
     if atk_econ not in ["Save", "Force", "Half", "Full"]:
