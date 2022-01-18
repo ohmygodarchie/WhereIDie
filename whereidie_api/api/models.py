@@ -10,7 +10,7 @@ from django.db import models
 
 class PlantLocations(models.Model):
     queueid = models.CharField(max_length=32)
-    mapid = models.CharField(max_length=32)
+    mapid = models.CharField(max_length=32) 
     rank_id = models.IntegerField()
     red_team_econ = models.CharField(max_length=32)
     blue_team_econ = models.CharField(max_length=32)
@@ -19,6 +19,7 @@ class PlantLocations(models.Model):
 
     class Meta:
         db_table = 'PLANT_LOCATIONS'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorAscent(models.Model):
@@ -36,6 +37,7 @@ class KdCollectorAscent(models.Model):
 
     class Meta:
         db_table = 'kd_collector_ASCENT'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorBind(models.Model):
@@ -53,6 +55,7 @@ class KdCollectorBind(models.Model):
 
     class Meta:
         db_table = 'kd_collector_BIND'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorBreeze(models.Model):
@@ -70,6 +73,7 @@ class KdCollectorBreeze(models.Model):
 
     class Meta:
         db_table = 'kd_collector_BREEZE'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorFracture(models.Model):
@@ -87,6 +91,7 @@ class KdCollectorFracture(models.Model):
 
     class Meta:
         db_table = 'kd_collector_FRACTURE'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorHaven(models.Model):
@@ -104,6 +109,7 @@ class KdCollectorHaven(models.Model):
 
     class Meta:
         db_table = 'kd_collector_HAVEN'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorIcebox(models.Model):
@@ -121,6 +127,7 @@ class KdCollectorIcebox(models.Model):
 
     class Meta:
         db_table = 'kd_collector_ICEBOX'
+        app_label = 'whereidie_api.api'
 
 
 class KdCollectorSplit(models.Model):
@@ -138,3 +145,4 @@ class KdCollectorSplit(models.Model):
 
     class Meta:
         db_table = 'kd_collector_SPLIT'
+        app_label = 'whereidie_api.api'

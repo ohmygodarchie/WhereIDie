@@ -5,6 +5,7 @@ import asyncio
 import httpx
 from .scripts import getinfo
 from .scripts import Constants
+from . import HeatMapGenerator
 # Create your views here.
 #just a hello world func
 
@@ -21,5 +22,5 @@ async def getHeatMap(request,MAP, atk_econ, def_econ):
         return HttpResponseNotFound('404 Not Found')
     if def_econ not in ["Save", "Force", "Half", "Full"]:
         return HttpResponseNotFound('404 Not Found')
-    
+    HeatMapGenerator.generate_heatmaps()
     return HttpResponse(MAP)
