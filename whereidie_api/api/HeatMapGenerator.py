@@ -11,6 +11,13 @@ from . import models
 from asgiref.sync import sync_to_async
 ranks = [[0],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[21,22,23],[24]]
 rank_names = ["Unranked","Iron", "Bronze", "Silver", "Gold", "Platinum", "Diamond", "Immortal", "Radiant"]
+econ_types = {
+    "Save": 0,
+    "Pistol": 1,
+    "Force": 2,
+    "Half": 3,
+    "Full": 4
+}
 # from enum import Enum
 # class BuyType (Enum):
 #     FULL = "Full"
@@ -62,13 +69,13 @@ def generate_heatmaps():
             # link for filter and more query stuff https://docs.djangoproject.com/en/4.0/ref/models/querysets/#id4
             rank_name = rank_names[indexOf(ranks,y)]
             for z in all_objs:
-                if z.atk_econ == "Save":
+                if z.red_team_econ:
                     pass
-                elif z.atk_econ == "Force":
+                elif z.red_team_econ == "Force":
                     pass
-                elif z.atk_econ == "Half":
+                elif z.red_team_econ == "Half":
                     pass
-                elif z.atk_econ == "Full":
+                elif z.red_team_econ == "Full":
                     pass
                 else:
                     print("Error: Invalid atk_econ")
