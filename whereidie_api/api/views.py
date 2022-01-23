@@ -17,6 +17,8 @@ def index(request):
 #compile heatmap data
 def getHeatMap(request,MAP, atk_econ, def_econ):
     if MAP not in Constants.MAPS.values():
+        print(MAP)
+        print(Constants.MAPS.values())
         return HttpResponseNotFound('404 Not Found')
     if atk_econ not in ["Save", "Force", "Half", "Full"]:
         return HttpResponseNotFound('404 Not Found')
